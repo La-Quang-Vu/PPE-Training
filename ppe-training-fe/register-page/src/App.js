@@ -4,7 +4,7 @@ import './assets/css/dist/tailwind.css';
 
 function App() {
   return (
-    <div className="bg-gray-200 flex p-10">
+    <div className="bg-gray-200 flex justify-center lg:justify-center md:justify-start p-10">
       <section className="max-w-sm bg-white rounded-lg shadow-md py-10 px-8">
         <h1 className="text-2xl font-bold w-screen">Register</h1>
         <p className="text-gray-400 text-xl mt-5">
@@ -56,7 +56,7 @@ function App() {
           <a className="text-indigo-700 underline ml-1">Sign In</a>
         </p>
       </section>
-      <section className="">
+      <section className="hidden md:block">
       <img className="max-w-lg ml-20 mt-20" src=".\assets\images\bg-login\reading-book.png" />
       
       </section>

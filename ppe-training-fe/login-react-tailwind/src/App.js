@@ -5,7 +5,7 @@ import './assets/css/dist/tailwind.css';
 
 function App() {
   return (
-    <div className="bg-gray-200 flex p-10 h-screen w-screen overflow-hidden">
+    <div className="bg-gray-200 flex justify-center lg:justify-center md:justify-start p-10 h-screen w-screen overflow-hidden">
       {/* <button className="btn">PPE</button> */}
       <section className="">
       <section className="bg-white max-w-sm	rounded-lg shadow-md py-8 px-5">
@@ -55,7 +55,7 @@ function App() {
       </section>
       <section className=""></section>
       </section>
-      <section>
+      <section className="hidden md:block">
         <img className="max-w-lg ml-20 mt-20" src=".\assets\images\bg-login\undraw_book_lover_mkck-1.png" />
       </section>
     </div>

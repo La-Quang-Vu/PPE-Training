@@ -4,7 +4,7 @@ import './assets/css/dist/tailwind.css';
 
 function App() {
   return (
-    <div className="bg-gray-200 flex p-10 h-screen w-screen overflow-hidden">
+    <div className="bg-gray-200 flex justify-center lg:justify-center md:justify-start p-10 h-screen w-screen overflow-hidden">
       <section className="">
         <section className="bg-white max-w-sm	rounded-lg shadow-md py-8 px-5">
         <h1 className="text-2xl font-bold w-screen">Forgot Password?</h1>
@@ -25,8 +25,8 @@ function App() {
         </section>
         <section></section>
       </section>
-      <section className="">
-        <img className="max-w-lg ml-20 mt-20" src=".\assets\images\bg-login\undraw_book_lover_mkck-1.png" />
+      <section className="hidden md:block">
+        <img className="max-w-lg ml-20 mt-0" src=".\assets\images\bg-login\undraw_book_lover_mkck-1.png" />
       </section>
     </div>
   );
