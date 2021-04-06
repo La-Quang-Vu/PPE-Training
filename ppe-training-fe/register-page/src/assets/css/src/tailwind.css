@@ -1,4 +1,6 @@
-/* ./src/tailwind.css */
+/* ./src/tailwind.css 
+  npx tailwindcss-cli@latest build ./src/tailwind.css -o ./dist/tailwind.css
+*/
 @tailwind base;
 @tailwind components;
 
@@ -21,4 +23,7 @@
   .absolute-x.absolute-y {
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+  }
+  .bg-black-50 {
+    background: rgb(0 0 0 / 50%);
   }

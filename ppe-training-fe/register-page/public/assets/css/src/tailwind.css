@@ -1,4 +1,7 @@
-/* ./src/tailwind.css */
+/* ./src/tailwind.css 
+npx tailwindcss-cli@latest build ./src/tailwind.css -o ./dist/tailwind.css
+*/
+
 @tailwind base;
 @tailwind components;
 
