@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import Alert from '../../components/Alert';
 
 
 function RegisterUser() {
@@ -13,12 +14,14 @@ function RegisterUser() {
   
     axios.post('http://happy_eyes.ppe-be.codeby.com/api/user/register', payload)
       .then(function (response) {
-        setMessage('Register user success')
+        // setMessage('Register user success')
+        Alert({t: 'success', c: ['Register user success']})
         console.log(response);
       })
       .catch(function (error) {
         const err = error.response.data.message
-        setMessage(err)
+        // setMessage(err)
+        Alert({t: 'error', c: [err]})
         //console.log(error);
       });
   }
@@ -26,7 +29,7 @@ function RegisterUser() {
   return (
     <section className="relative">
       {/* <Alert content */}
-      {message &&
+      {/* {message &&
         <>
           <div className="z-10 absolute left-0 right-0 top-0 bottom-0 bg-black-50"></div>
           <div className="z-20 left-0 right-0 mx-8 absolute absolute-y bg-white p-3 border border-gray-200 shadow-lg rounded-md">
@@ -34,7 +37,7 @@ function RegisterUser() {
             <button onClick={(e)=>setMessage(null)} className="btn mt-3 w-full">Close</button>
           </div>
         </>
-      }
+      } */}
 
       <div className="bg-gray-200 flex justify-center lg:justify-center md:justify-start p-10 overflow-x-hidden">
       <form onSubmit={(e)=>createUser(e)} className="max-w-sm bg-white rounded-lg shadow-md py-10 px-8">

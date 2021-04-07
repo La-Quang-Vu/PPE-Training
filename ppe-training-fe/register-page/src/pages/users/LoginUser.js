@@ -14,12 +14,13 @@ function LoginUser() {
         axios.post('http://happy_eyes.ppe-be.codeby.com/api/user/login', payload)
             .then(function (response) {
             const msg = response.data.message;
-            const sta = response.data.status;
-            console.log('sta',sta);
-            if (sta === true) {
-                setMessage('Login successful');
+            if (response.data.status) {
+                // setMessage('Login successful');
+
+                Alert({t: `success`, c: [`login success`]});
             } else {
-                setMessage(msg);
+                // setMessage(msg);
+                Alert({t: `error`, c: [msg]});
             }
             console.log(response);
             })
@@ -34,7 +35,7 @@ function LoginUser() {
   return (
     <section className="relative">
         {/* <Alert content */}
-        {message &&
+        {/* {message &&
             <>
             <div className="z-10 absolute left-0 right-0 top-0 bottom-0 bg-black-50"></div>
             <div className="z-20 left-0 right-0 mx-8 absolute absolute-y bg-white p-3 border border-gray-200 shadow-lg rounded-md">
@@ -42,7 +43,7 @@ function LoginUser() {
                 <button onClick={(e)=>setMessage(null)} className="btn mt-3 w-full">Close</button>
             </div>
             </>
-        }
+        } */}
         {/* <Alert message={message}/> */}
         
 
