@@ -33,7 +33,7 @@ function RenderDialog({resolve, obj}) {
                                 type="button"
                                 className="absolute top-0 right-0 bg-white text-gray-700 h-10 w-10 rounded-full hover:bg-gray-400 hover:text-black flex items-center justify-center"
                             >
-                                <i className="material-icons text-2xl">close</i>
+                                <i className="material-icons text-2xl">x</i>
                             </button>
                             {i &&
                             <div className="text-center">

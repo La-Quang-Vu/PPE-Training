@@ -7,34 +7,27 @@ import Cookies from 'universal-cookie';
 function LoginUser() {
   const cookies = new Cookies();
 
-    const [message,setMessage] = useState(null) 
+  const loginUser = async (e) => {
+    e.preventDefault();
+    const payload = new FormData(e.target);
+    console.log('payload',payload);
 
-    const loginUser = async (e) => {
-        e.preventDefault();
-        const payload = new FormData(e.target);
-        console.log('payload',payload);
-  
-        axios.post('http://happy_eyes.ppe-be.codeby.com/api/user/login', payload)
-            .then(function (response) {
-            const msg = response.data.message;
-            if (response.data.status) {
-                // setMessage('Login successful');
-
-                Alert({t: `success`, c: [`login success`]});
-                cookies.set('ppe-training-fe-token', response.data.data.token , { path: '/', expires: new Date(Date.now()+25920000000)});
-            } else {
-                // setMessage(msg);
-                Alert({t: `error`, c: [msg]});
-            }
-            console.log(response);
-            })
-            .catch(function (error) {
-            const err = error.response.data.message
-            setMessage(err)
-            //console.log(error);
+    axios.post('http://happy_eyes.ppe-be.codeby.com/api/user/login', payload)
+      .then(function (response) {
+        const msg = response.data.message;
+        if (response.data.status) {
+            Alert({t: `success`, c: [`login success`]});
+            cookies.set('ppe-training-fe-token', response.data.data.token , { path: '/', expires: new Date(Date.now()+25920000000)});
+        } else {
+            Alert({t: `error`, c: [msg]});
+        }
+        console.log(response);
+      })
+      .catch(function (error) {
+        // const err = error.response.data.message
+        // console.log(error);
       });
-    }
-
+  }
 
   return (
     <section className="relative">

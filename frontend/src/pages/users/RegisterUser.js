@@ -5,7 +5,7 @@ import Alert from '../../components/Alert';
 import Cookies from 'universal-cookie';
 
 function RegisterUser() {
-  const [message,setMessage] = useState(null) 
+  // const [message,setMessage] = useState(null) 
   const cookies = new Cookies();
 
   const createUser = async (e) => {
@@ -15,15 +15,17 @@ function RegisterUser() {
   
     axios.post('http://happy_eyes.ppe-be.codeby.com/api/user/register', payload)
       .then(function (response) {
-        // setMessage('Register user success')
-        Alert({t: 'success', c: ['Register user success']})
-        cookies.set('ppe-training-fe-token', response.data.data.token , { path: '/', expires: new Date(Date.now()+25920000000)});
+        if (response.data.status) {
+            Alert({t: `success`, c: [`Register user success`]});
+            cookies.set('ppe-training-fe-token', response.data.data.token , { path: '/', expires: new Date(Date.now()+25920000000)});
+        } else {
+            Alert({t: `error`, c: [response.data.message]});
+        }
         console.log(response);
       })
       .catch(function (error) {
-        const err = error.response.data.message
-        // setMessage(err)
-        Alert({t: 'error', c: [err]})
+        /* const err = error.response.data.message
+        Alert({t: 'error', c: [err]}) */
         //console.log(error);
       });
   }
