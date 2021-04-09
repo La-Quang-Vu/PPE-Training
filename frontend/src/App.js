@@ -6,6 +6,7 @@ import axios from 'axios';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import RegisterUser from './pages/users/RegisterUser';
 import LoginUser from './pages/users/LoginUser';
+import ForgotPassword from './pages/users/ForgotPassword';
 
 
 function App() {
@@ -21,6 +22,11 @@ function App() {
           exact
           path={'/LoginUser'}
           component={LoginUser}
+        />
+        <Route
+          exact
+          path={'/ForgotPassword'}
+          component={ForgotPassword}
         />
         <Route
           exact

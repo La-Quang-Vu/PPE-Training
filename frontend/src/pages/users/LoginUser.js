@@ -65,7 +65,7 @@ function LoginUser() {
           <label className="block text-grey-darker text-sm mb-1 mt-4">
               <div className="flex justify-between mb-1">
                 <span className="">Password</span>
-                <a className="text-indigo-700 underline ml-1">Forgot password?</a>
+                <Link to="ForgotPassword" className="text-indigo-700 underline ml-1">Forgot password?</Link>
               </div>
             <input className="shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 text-grey-darker leading-tight " 
             name="password"
