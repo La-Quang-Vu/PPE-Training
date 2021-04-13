@@ -10,12 +10,18 @@ import ForgotPassword from './pages/users/ForgotPassword';
 import CreatePost from './pages/posts/CreatePost';
 import ListPost from './pages/posts/ListPost';
 import EditPost from './pages/posts/EditPost';
+import ListAllPost from './pages/posts/ListAllPost';
 
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route
+          exact
+          path={'/ListAllPost'}
+          component={ListAllPost}
+        />
         <Route
           exact
           path={'/EditPost/:post_id'}

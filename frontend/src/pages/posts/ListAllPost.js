@@ -5,9 +5,10 @@ import Cookies from 'universal-cookie';
 import Alert from '../../components/Alert';
 import moment from 'moment';
 
-function ListPost() {
+function ListAllPost() {
     const cookies = new Cookies();
     const [posts, setPosts] = useState([])
+    const [users, setUsers] = useState([])
 
     useEffect(() => {
       onLoadPost()
@@ -19,15 +20,35 @@ function ListPost() {
       }
     }
 
+    function GetUserName(id)
+    {
+      var name = "";
+      /* users.map((user,key) => {
+        if (id == (user.id)) {
+          name = user.name;
+        }
+      }
+      ) */
+      var x;
+      for (x in users) {
+        if (id == (users[x].id)) {
+          name = users[x].name;
+          break;
+        }
+      }
+      return name
+    }
+
     const onLoadPost = () => {
-      axios.get('http://happy_eyes.ppe-be.codeby.com/api/posts', {headers:setHeader.headers})
+      axios.get('http://happy_eyes.ppe-be.codeby.com/api/all-posts', {headers:setHeader.headers})
         .then(function (response) {
-          setPosts(response?.data?.data)
           console.log('response',response)
+          setPosts(response?.data?.data?.posts)
+          setUsers(response?.data?.data?.users)
 
         })
         .catch(function (error) {
-
+          console.log('error',error)
         });
     }
 
@@ -51,10 +72,8 @@ function ListPost() {
     return (
         <div className="mx-auto max-w-sm">
             <nav className="uppercase flex space-x-4 justify-center py-3">
-                {/* <Link to={'/ListPost?me'} className="text-blue-700">My posts</Link>
-                <Link to={'/ListPost?all'}>All posts</Link> */}
-                <Link to={'/ListPost?me'} className="text-blue-700">My posts</Link>
-                <Link to={'/ListAllPost'}>All posts</Link>
+                <Link to={'/ListPost?me'}>My posts</Link>
+                <Link to={'/ListAllPost'} className="text-blue-700">All posts</Link>
                 <Link to={'/CreatePost'}>Create</Link>
             </nav>
             <ul className="">
@@ -64,6 +83,7 @@ function ListPost() {
                         <Link className="" to={`/EditPost/${post.id}`}>
                             <h3 className="font-semibold">{post.title}</h3>
                             <p>{post.description}</p>
+                            <p className="text-gray-400 mt-1">Created by: {GetUserName(post.user_id)}</p>
                             <p className="text-gray-400">{moment(post.created_at).fromNow()}</p>
                         </Link>
                         <button 
@@ -77,4 +97,4 @@ function ListPost() {
         </div>
     )
 }
-export default ListPost
+export default ListAllPost
