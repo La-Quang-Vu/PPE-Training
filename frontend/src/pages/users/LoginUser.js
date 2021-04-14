@@ -12,7 +12,7 @@ function LoginUser() {
     const payload = new FormData(e.target);
     console.log('payload',payload);
 
-    axios.post('http://happy_eyes.ppe-be.codeby.com/api/user/login', payload)
+    axios.post(`${process.env.REACT_APP_API_URL}/user/login`, payload)
       .then(function (response) {
         const msg = response.data.message;
         if (response.data.status) {

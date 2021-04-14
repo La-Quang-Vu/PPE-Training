@@ -11,7 +11,23 @@ import CreatePost from './pages/posts/CreatePost';
 import ListPost from './pages/posts/ListPost';
 import EditPost from './pages/posts/EditPost';
 import ListAllPost from './pages/posts/ListAllPost';
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
+const Auth = (props) => {
+  const params = new URLSearchParams(props.location.search);
+  const token = params.get('token');
+  if (token) {
+    cookies.set("ppe-training-fe-token", token, {
+      path: "/",
+      expires: new Date(Date.now() + 25920000000),
+    });
+    window.location.assign('/ListPost')
+    return <></>
+  }
+  window.location.assign('/RegisterUser')
+  return <></>
+}
 
 function App() {
   return (
@@ -57,6 +73,7 @@ function App() {
           path={'/'}
           render={() => <Redirect to="/RegisterUser" />}
         />
+        <Route exact path={"/Auth"} component={Auth} />
       </Switch>
     </BrowserRouter>
   )

@@ -37,7 +37,7 @@ function EditPost({match}) {
         }
     }
   
-    axios.post(`http://happy_eyes.ppe-be.codeby.com/api/posts/${post_id}`, payload, setHeader)
+    axios.post(`${process.env.REACT_APP_API_URL}/posts/${post_id}`, payload, setHeader)
       .then(function (response) {
         if (response.data.status) {
             Alert({t: `success`, c: [`Modify post success`]});

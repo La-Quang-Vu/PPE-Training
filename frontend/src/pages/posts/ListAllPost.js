@@ -40,9 +40,9 @@ function ListAllPost() {
     }
 
     const onLoadPost = () => {
-      axios.get('http://happy_eyes.ppe-be.codeby.com/api/all-posts', {headers:setHeader.headers})
+      axios.get(`${process.env.REACT_APP_API_URL}/all-posts`, {headers:setHeader.headers})
         .then(function (response) {
-          console.log('response',response)
+          // console.log('response',response)
           setPosts(response?.data?.data?.posts)
           setUsers(response?.data?.data?.users)
 
@@ -54,7 +54,7 @@ function ListAllPost() {
 
     const onDelete = (post) => {
       if (window.confirm("Are you sure, want delete it?")){
-        axios.delete(`http://happy_eyes.ppe-be.codeby.com/api/posts/${post.id}`, setHeader)
+        axios.delete(`${process.env.REACT_APP_API_URL}/posts/${post.id}`, setHeader)
         .then(function (response) {
           if (response.data.status) {
             onLoadPost()
@@ -62,7 +62,7 @@ function ListAllPost() {
           } else {
             Alert({t: `error`, c: [response.data.message]});
           }
-          console.log(response);
+          //console.log(response);
         })
         .catch(function (error) {
         });
@@ -82,7 +82,7 @@ function ListAllPost() {
                     <li className="py-2 my-2 border-t">
                         <Link className="" to={`/EditPost/${post.id}`}>
                             <h3 className="font-semibold">{post.title}</h3>
-                            <p>{post.description}</p>
+                            <p className="break-words">{post.description}</p>
                             <p className="text-gray-400 mt-1">Created by: {GetUserName(post.user_id)}</p>
                             <p className="text-gray-400">{moment(post.created_at).fromNow()}</p>
                         </Link>

@@ -18,7 +18,7 @@ function CreatePost() {
         }
     }
   
-    axios.post('http://happy_eyes.ppe-be.codeby.com/api/posts', payload, setHeader)
+    axios.post(`${process.env.REACT_APP_API_URL}/posts`, payload, setHeader)
       .then(function (response) {
         if (response.data.status) {
             Alert({t: `success`, c: [`Create post success`]});

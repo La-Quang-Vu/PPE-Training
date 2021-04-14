@@ -13,7 +13,7 @@ function RegisterUser() {
     const payload = new FormData(e.target);
     console.log('payload',payload);
   
-    axios.post('http://happy_eyes.ppe-be.codeby.com/api/user/register', payload)
+    axios.post(`${process.env.REACT_APP_API_URL}/user/register`, payload)
       .then(function (response) {
         if (response.data.status) {
             Alert({t: `success`, c: [`Register user success`]});
@@ -24,6 +24,20 @@ function RegisterUser() {
         console.log(response);
       })
       .catch(function (error) {
+        /* const err = error.response.data.message
+        Alert({t: 'error', c: [err]}) */
+        //console.log(error);
+      });
+  }
+
+  const genarateUrl = (flatform) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/auth-generate-url?platform=${flatform}`, { flatform })
+      .then(function (response) {
+        console.log('response',response)
+        window.location.assign(response?.data?.data)
+      })
+      .catch(function (error) {
+        console.log('error',error)
         /* const err = error.response.data.message
         Alert({t: 'error', c: [err]}) */
         //console.log(error);
@@ -84,11 +98,18 @@ function RegisterUser() {
           <span className="absolute absolute-x absolute-y bg-white px-3 mt-px text-sm text-gray-400">or</span>
         </div>
         <div className="flex space-x-3 mt-5">
-          <button type="button" className="flex item-center px-4 py-2 rounded font-bold w-full text-red-600 border border-red-600">
+          <button 
+            onClick={(e) => genarateUrl(`google`)}
+            type="button" 
+            className="flex item-center px-4 py-2 rounded font-bold w-full text-red-600 border border-red-600"
+          >
             <img className="w-5 mr-4" src=".\assets\images\google-icon.png" />
             Google
           </button>
-          <button type="button" className="flex item-center px-4 py-2 rounded font-bold w-full text-blue-600 border border-blue-600">
+          <button 
+            onClick={(e) => genarateUrl(`facebook`)}
+            type="button" 
+            className="flex item-center px-4 py-2 rounded font-bold w-full text-blue-600 border border-blue-600">
             <img className="w-7 mr-2" src=".\assets\images\facebook-icon1.png" />
             Facebook
           </button>

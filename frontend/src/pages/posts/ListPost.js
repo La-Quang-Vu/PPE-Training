@@ -20,7 +20,8 @@ function ListPost() {
     }
 
     const onLoadPost = () => {
-      axios.get('http://happy_eyes.ppe-be.codeby.com/api/posts', {headers:setHeader.headers})
+      console.log('link',`${process.env.REACT_APP_API_URL}/posts`)
+      axios.get(`${process.env.REACT_APP_API_URL}/posts`, {headers:setHeader.headers})
         .then(function (response) {
           setPosts(response?.data?.data)
           console.log('response',response)
@@ -33,7 +34,7 @@ function ListPost() {
 
     const onDelete = (post) => {
       if (window.confirm("Are you sure, want delete it?")){
-        axios.delete(`http://happy_eyes.ppe-be.codeby.com/api/posts/${post.id}`, setHeader)
+        axios.delete(`${process.env.REACT_APP_API_URL}/posts/${post.id}`, setHeader)
         .then(function (response) {
           if (response.data.status) {
             onLoadPost()
@@ -63,7 +64,7 @@ function ListPost() {
                     <li className="py-2 my-2 border-t">
                         <Link className="" to={`/EditPost/${post.id}`}>
                             <h3 className="font-semibold">{post.title}</h3>
-                            <p>{post.description}</p>
+                            <p className="break-words">{post.description}</p>
                             <p className="text-gray-400">{moment(post.created_at).fromNow()}</p>
                         </Link>
                         <button 
