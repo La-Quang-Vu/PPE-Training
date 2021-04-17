@@ -1,53 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
 import {Link} from 'react-router-dom';
-import Cookies from 'universal-cookie';
-import Alert from '../../components/Alert';
 import moment from 'moment';
+import { useDispatch, useSelector } from "react-redux";
+import {listPost, postsSelector, deletePost} from "../../slices/posts";
 
 function ListPost() {
-    const cookies = new Cookies();
-    const [posts, setPosts] = useState([])
+    const {lPosts} = useSelector(postsSelector)
+    const dispatch = useDispatch();
 
     useEffect(() => {
-      onLoadPost()
+      dispatch(listPost())
     }, [])
 
-    var setHeader = {
-      headers: {
-          Authorization: 'Bearer ' + cookies.get('ppe-training-fe-token')
-      }
-    }
-
-    const onLoadPost = () => {
-      console.log('link',`${process.env.REACT_APP_API_URL}/posts`)
-      axios.get(`${process.env.REACT_APP_API_URL}/posts`, {headers:setHeader.headers})
-        .then(function (response) {
-          setPosts(response?.data?.data)
-          console.log('response',response)
-
-        })
-        .catch(function (error) {
-
-        });
-    }
-
-    const onDelete = (post) => {
-      if (window.confirm("Are you sure, want delete it?")){
-        axios.delete(`${process.env.REACT_APP_API_URL}/posts/${post.id}`, setHeader)
-        .then(function (response) {
-          if (response.data.status) {
-            onLoadPost()
-            // Alert({t: `success`, c: [`Delete post success`]});
-          } else {
-            Alert({t: `error`, c: [response.data.message]});
-          }
-          console.log(response);
-        })
-        .catch(function (error) {
-        });
-      }
-    }
+    const onDelete = (post) => dispatch(deletePost(post))
 
     return (
         <div className="mx-auto max-w-sm">
@@ -60,7 +25,7 @@ function ListPost() {
             </nav>
             <ul className="">
                 
-                {posts.map((post,key) => 
+                {lPosts.map((post,key) => 
                     <li className="py-2 my-2 border-t">
                         <Link className="" to={`/EditPost/${post.id}`}>
                             <h3 className="font-semibold">{post.title}</h3>

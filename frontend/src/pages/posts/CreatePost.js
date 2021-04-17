@@ -1,43 +1,16 @@
 import React, {useState} from 'react';
-import axios from 'axios';
-import {Link} from 'react-router-dom';
-import Cookies from 'universal-cookie';
-import Alert from '../../components/Alert';
+import { useDispatch, useSelector } from "react-redux";
+import {createPost} from "../../slices/posts";
 
 function CreatePost() {
-    const cookies = new Cookies();
-
-    const createPost = async (e) => {
-    e.preventDefault();
-    const payload = new FormData(e.target);
-    console.log('payload',payload);
-
-    var setHeader = {
-        headers: {
-            Authorization: 'Bearer ' + cookies.get('ppe-training-fe-token')
-        }
-    }
-  
-    axios.post(`${process.env.REACT_APP_API_URL}/posts`, payload, setHeader)
-      .then(function (response) {
-        if (response.data.status) {
-            Alert({t: `success`, c: [`Create post success`]});
-            // cookies.set('ppe-training-fe-token', response.data.data.token , { path: '/', expires: new Date(Date.now()+25920000000)});
-        } else {
-            Alert({t: `error`, c: [response.data.message]});
-        }
-        console.log(response);
-      })
-      .catch(function (error) {
-        /* const err = error.response.data.message
-        Alert({t: 'error', c: [err]}) */
-        //console.log(error);
-      });
-    }
+    const dispatch = useDispatch();
 
     return (
         <>
-            <form onSubmit={(e)=>createPost(e)} className="max-w-sm bg-white rounded-lg shadow-md py-10 px-8">
+            <form 
+                onSubmit={(e) => dispatch(createPost(e))} 
+                className="max-w-sm bg-white rounded-lg shadow-md py-10 px-8"
+            >
                 <h1 className="text-2xl font-bold w-screen">Create Post</h1>
                 
                 <label className="block text-grey-darker text-sm mb-1 mt-4">
